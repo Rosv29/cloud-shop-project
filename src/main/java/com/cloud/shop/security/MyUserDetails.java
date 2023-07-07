@@ -1,5 +1,6 @@
 package com.cloud.shop.security;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,7 +32,15 @@ public class MyUserDetails extends User {
 		this.name=entity.getName();
 		this.email=entity.getEmail();
 		this.phone=entity.getPhone();
-		this.korName=entity.getRoles().stream().map(role-> role.getKoName().toString()).findFirst().orElseThrow();
+		this.korName = entity.getRoles()
+			    .stream()
+			    .map(role -> role.getKorName())
+			    .filter(name -> name.contains("관리자"))
+			    .findFirst()
+			    .orElse("고객");
+		
+		
+	
 	}
 
 

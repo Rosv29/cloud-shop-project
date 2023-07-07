@@ -19,9 +19,11 @@ public class MemberSignupDTO {
 	
 	private String email;
 	
+	private String phone;
+	
 	public MemberEntity toEntity(PasswordEncoder encoder) {
 		return MemberEntity.builder()
 				.id(id).password(encoder.encode(password)).name(name)
-				.email(email).phone(email).build();
+				.email(email).phone(phone).build();
 	}
 }

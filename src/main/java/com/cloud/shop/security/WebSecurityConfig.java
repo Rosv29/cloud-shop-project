@@ -15,12 +15,16 @@ public class WebSecurityConfig {
 				.antMatchers("/css/**","/js/**","/images/**","/webjars/**").permitAll()
 				.antMatchers("/member/**").permitAll()
 				.antMatchers("/").permitAll()
+				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
 			.formLogin(formLogin -> formLogin
 				.loginPage("/member/signin")
 				.usernameParameter("id")
 			
+			).logout(logout -> logout
+				.logoutSuccessUrl("/")
+				.permitAll()
 			)
 			;
 		return http.build();

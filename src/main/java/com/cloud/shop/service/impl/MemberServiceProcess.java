@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cloud.shop.domain.dao.MemberEntityRepository;
 import com.cloud.shop.domain.dto.MemberSignupDTO;
+import com.cloud.shop.redis.RedisUtil;
 import com.cloud.shop.security.MemberRole;
 import com.cloud.shop.service.MemberService;
 
@@ -25,7 +27,10 @@ public class MemberServiceProcess implements MemberService {
 	private final PasswordEncoder encoder;
 	private final JavaMailSender sender;
 	private final String senderEmail = "fjoker1@gmail.com";
-
+	private final StringRedisTemplate redisTemplate;
+	private final RedisUtil redis;
+	
+	
 	@Override
 	public void saveProcess(MemberSignupDTO dto) {
 		repo.save(dto.toEntity(encoder).addRole(MemberRole.USER));
@@ -53,7 +58,7 @@ public class MemberServiceProcess implements MemberService {
 	}
 
 	@Override
-	public String verifyEmail(String email) {
+	public void verifyEmail(String email) {
 		MimeMessage message = sender.createMimeMessage();
 		String code =new Random().ints(48, 58).limit(6)
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
@@ -70,8 +75,13 @@ public class MemberServiceProcess implements MemberService {
 			e.printStackTrace();
 		}
 		sender.send(message);
+		redis.setDataExpire(email, code, 180);
+	}
+
+	@Override
+	public String verifyCode(String email) {
 		
-		return code;
+		return redis.getData(email);
 	}
 
 

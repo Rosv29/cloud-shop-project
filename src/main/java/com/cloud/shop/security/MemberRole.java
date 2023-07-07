@@ -11,6 +11,6 @@ public enum MemberRole {
 	ADMIN("ROLE_ADMIN","관리자");
 	
 	private final String roleName;
-	private final String koName;
+	private final String korName;
 
 }

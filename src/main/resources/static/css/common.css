@@ -5,6 +5,17 @@ body{
 }
 *{margin: 0; padding: 0; box-sizing: border-box;}
 li{list-style: none;}
-a{text-decoration: none;}
+a{text-decoration: none; color: blue;}
+input{
+	border:1px solid #a0a0a0;
+}
 .flex{display:flex;}
 .center{justify-content: center;}
+.err{
+	color: red;
+}
+.title{
+	font-size: 35px;
+	font-weight: 700;
+	text-align: center;
+}

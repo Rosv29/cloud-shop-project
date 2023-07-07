@@ -10,6 +10,8 @@ public interface MemberService {
 
 	boolean checkEmail(String email);
 
-	String verifyEmail(String email);
+	void verifyEmail(String email);
+
+	String verifyCode(String email);
 
 }

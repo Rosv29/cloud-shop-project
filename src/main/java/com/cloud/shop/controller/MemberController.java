@@ -48,8 +48,15 @@ public class MemberController {
 	public boolean checkEmail(@RequestParam String email) {
 		return service.checkEmail(email);
 	}
+	//이메일로 인증번호 전송
+	@ResponseBody
 	@PostMapping("verifyEmail")
 	public void verifyEmail(String email) {
 		service.verifyEmail(email);
+	}
+	@ResponseBody
+	@PostMapping("verifyCode")
+	public String verifyCode(String email) {
+		return service.verifyCode(email);
 	}
 }

@@ -4,11 +4,17 @@
 		<h1>상단영역</h1>
 		
 		<div class="wrap">
+			<div>
+				<a href="/">HOME</a>
+			</div>
 			<div sec:authorize="isAnonymous()">
 				<a href="/member/signin">로그인</a>
-				<a href="/member/signup">회원가입</a>		
+				<a href="/member/signup">회원가입</a>
 			</div>
 			<div sec:authorize="isAuthenticated()">
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<a href="/admin/index">관리자페이지</a>
+				</div>
 				<span sec:authentication="principal.name"></span>
 				<span sec:authentication="principal.korName"></span>
 				<form action="logout" method="post">
