@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/admin/product/create.css">
+		<script src="/js/admin/product/create.js"></script>
+	</head>
+	<main>
+		<h1>상품등록 페이지</h1>
+		<div class="form-area">
+			<form action="">
+				<div class="input-area">
+					<label>1차카테고리</label>
+					<select>
+						<option value="">샘플</option>
+					</select>
+				</div>
+				<div class="input-area">	
+					<label>2차카테고리</label>
+					<select>
+						<option value="">샘플</option>
+					</select>
+				</div>
+				<div class="input-area">
+					<label>상품명</label>
+					<input type="text" placeholder="상품명">
+				</div>
+				<div class="input-area">
+					<label>상품가격</label>
+					<input type="text" placeholder="상품가격">
+				</div>
+				<div class="input-area">
+					<label>상품이미지</label>
+					<label class="temp-img"><input type="file" onchange="tempUpload(this)"></label>
+				</div>
+				<div class="input-area">
+					<label>상품설명</label>
+					<textarea rows="5" cols="50"></textarea>
+				</div>
+				<div class="input-area">
+					<button type="submit">등록</button>
+				</div>
+			</form>
+		</div>
+	</main>
+</html>

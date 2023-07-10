@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.form-area{
+	
+}
+
+.form-area > .input-area{
+
+}
+
+.input-area > .temp-img > input[type=file]{
+	display: none;
+}
+
+.input-area > .temp-img{
+	background-image: url("");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	display:block;
+	width: 200px;
+	height: 200px;
+}
+
+.input-area > .temp-img::before{
+	content: "+";
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 200px;
+	background-color: rgba(0,255,255,0.25);
+	border: 1px dotted #e9e9e9;
+	
+}
