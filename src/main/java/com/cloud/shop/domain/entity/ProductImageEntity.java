@@ -1,10 +1,10 @@
 package com.cloud.shop.domain.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,27 +16,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "product")
+@Table(name = "productImage")
 @Entity
-public class ProductEntity extends BaseDateEntity{
+public class ProductImageEntity {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private long pNo;
+	private long iNo;
 	
-	@Column(nullable = false)
-	private String pName;
+	private String bucketKey;
 	
-	@Column(nullable = false)
-	private int pPrice;
+	private boolean def;
 	
-	@Column(nullable = false)
-	private int pStock;
-	
-	@Column(nullable = false)
-	private String pContent;
-	
-	@Column(nullable = false)
-	private boolean pStatus;
-	
+	@ManyToOne
+	private ProductEntity product;
 }

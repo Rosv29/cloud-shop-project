@@ -1,16 +1,46 @@
 @charset "UTF-8";
 
-body{
-	font-size:14px;
+body {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
 }
 
-body > header {
-	width: 250px;
-	background-color: #3f4b5c;
-	color: #fff;
-	min-height: 100vh;
+header {
+  width: 250px;
+  background-color: #3f4b5c;
+  color: #fff;
+  min-height: 100vh;
 }
 
-header> .wrap .menu-link a{
-	color: #fff !important;	
+.wrap {
+  padding: 20px;
 }
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.menu-wrap {
+  margin-top: 20px;
+}
+
+.menu-title {
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.menu-link div {
+  padding: 5px 0;
+}
+
+.menu-link a {
+  display: block;
+}
+
+

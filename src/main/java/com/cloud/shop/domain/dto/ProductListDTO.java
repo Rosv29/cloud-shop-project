@@ -1,0 +1,47 @@
+package com.cloud.shop.domain.dto;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.cloud.shop.domain.entity.ProductEntity;
+import com.cloud.shop.domain.entity.ProductImageEntity;
+
+import lombok.Data;
+
+@Data
+public class ProductListDTO {
+
+	private long no;
+	
+	private String name;
+
+	private int price;
+
+	private int stock;
+
+	private boolean status;
+
+	private LocalDateTime createDate;
+	
+	private String bucketKey;
+	
+	
+	
+	public ProductListDTO defImg(ProductImageEntity img,String domain) {
+		this.bucketKey= domain+img.getBucketKey();
+		return this;
+		
+	}
+
+
+	public ProductListDTO(ProductEntity entity) {
+		this.no=entity.getPNo();
+		this.name=entity.getPName();
+		this.price=entity.getPPrice();
+		this.stock=entity.getPStock();
+		this.status=entity.isPStatus();
+		this.createDate=entity.getCreatedDate();
+	}
+	
+
+}

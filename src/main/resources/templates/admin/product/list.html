@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/admin/product/list.css">
+		<script src="/js/admin/product/list.js"></script>
+	</head>
+	<main>
+		<div class="wrap">
+			<table border="1">
+				<tr>
+					<th>상품번호</th>
+					<th>상품명</th>
+					<th>대표이미지</th>
+					<th>가격</th>
+					<th>재고</th>
+					<th>판매상태</th>
+					<th>등록날짜</th>
+				</tr>
+				<tr th:each="dto:${list}">
+					<td th:text="${dto.no}"></td>
+					<td th:text="${dto.name}"></td>
+					<td>
+						<img th:src="${dto.bucketKey}" width="100px">
+					</td>
+					<td th:text="${dto.no}"></td>
+					<td th:text="${dto.no}"></td>
+				</tr>
+			</table>
+		</div>
+	</main>
+</html>

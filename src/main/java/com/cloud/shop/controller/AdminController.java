@@ -1,9 +1,11 @@
 package com.cloud.shop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cloud.shop.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
-
+	
+	private final ProductService service;
+	
 	@GetMapping("index")
 	public String index() {
 		return "admin/index";
@@ -28,6 +32,12 @@ public class AdminController {
 	@GetMapping("product/create")
 	public String productCreate() {
 		return "admin/product/create";
+	}
+	//상품조회수정 페이지이동
+	@GetMapping("product/list")
+	public String productList(Model model) {
+		service.listProcess(model);
+		return "admin/product/list";
 	}
 	
 

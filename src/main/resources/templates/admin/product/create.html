@@ -7,7 +7,7 @@
 	<main>
 		<h1>상품등록 페이지</h1>
 		<div class="form-area">
-			<form action="">
+			<form action="/admin/product/create" method="post">
 				<div class="input-area">
 					<label>1차카테고리</label>
 					<select>
@@ -22,21 +22,49 @@
 				</div>
 				<div class="input-area">
 					<label>상품명</label>
-					<input type="text" placeholder="상품명">
+					<input name="pName" type="text" placeholder="상품명">
 				</div>
 				<div class="input-area">
 					<label>상품가격</label>
-					<input type="text" placeholder="상품가격">
+					<input name="pPrice" type="text" placeholder="상품가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
 				</div>
 				<div class="input-area">
+					<label>상품재고</label>
+					<input name="pStock" type="text" placeholder="재고수량" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+				</div>
+				<div class="input-area def-img">
+					<label>대표이미지</label>
+					<div class="img-wrap">
+						<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this)"></label>
+						<input type="hidden" class="tempKey" name="tempKey">
+						<input type="hidden" class="newName" name="newName">
+						<input type="hidden" class="def" name="def" value="true">
+					</div>
+				</div>
+				<div class="input-area add-img">
 					<label>상품이미지</label>
-					<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this)"></label>
+					<div class="line-wrap">
+						<div class="img-wrap">
+							<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this)"></label>
+							<input type="hidden" class="tempKey" name="tempKey">
+							<input type="hidden" class="newName" name="newName">
+							<input type="hidden" class="def" name="def" value="false">
+						</div>
+					</div>
 				</div>
 				<div class="input-area">
 					<label>상품설명</label>
-					<textarea rows="5" cols="50"></textarea>
+					<textarea name="pContent" rows="5" cols="50"></textarea>
 				</div>
 				<div class="input-area">
+					<label>판매상태</label>
+					<span>판매가능</span>
+					<input type="radio" name="pStatus" checked="checked" value="true">
+					<span>판매불가</span>
+					<input type="radio" name="pStatus" value="false">
+				</div>
+				<div class="input-area">
+					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<button type="submit">등록</button>
 				</div>
 			</form>
