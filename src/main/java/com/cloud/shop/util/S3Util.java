@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -36,10 +37,12 @@ public class S3Util {
 	@Value("${cloud.aws.s3.domain}")
 	private String domain;
 
-	public Map<String, String> tempImgUpload(MultipartFile temp) {
-		Map<String, String> resultMap = new HashMap<>();
+	public Map<String, String> tempImgUpload(Optional<MultipartFile> tempFile) {
+	
+		MultipartFile temp=tempFile.orElseThrow();
 		String newName = createNewFileName(temp.getOriginalFilename());
 		String tempKey = tempPath + newName;
+		Map<String, String> resultMap = new HashMap<>();
 		try {
 			InputStream is = temp.getInputStream();
 			ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -56,6 +59,7 @@ public class S3Util {
 			e.printStackTrace();
 		}
 		return resultMap;
+
 	}
 	
 	

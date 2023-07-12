@@ -1,5 +1,6 @@
 package com.cloud.shop.domain.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,10 @@ public interface ProductImageEntityRepository extends JpaRepository<ProductImage
 
 
 	Optional<ProductImageEntity> findByProductAndDef(ProductEntity entity, boolean b);
+
+	List<ProductImageEntity> findAllByProduct(ProductEntity result);
+
+	List<ProductImageEntity> findAllByProductAndDef(ProductEntity result, boolean b);
 
 
 

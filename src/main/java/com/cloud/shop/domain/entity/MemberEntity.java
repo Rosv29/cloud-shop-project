@@ -38,7 +38,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(unique = true)
 	private String id;
 	
-	@Column(columnDefinition = "varchar(255) collate 'utf8mb4_bin' ")
+	@Column(columnDefinition = "varchar(255) collate utf8mb4_bin ")
 	private String password;
 	
 	private String name;

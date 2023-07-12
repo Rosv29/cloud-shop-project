@@ -1,6 +1,8 @@
 package com.cloud.shop.service.impl;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +38,7 @@ public class ProductServiceProcess implements ProductService {
 	
 
 	@Override
-	public Map<String, String> tempImgUpload(MultipartFile temp) {
+	public Map<String, String> tempImgUpload(Optional<MultipartFile> temp) {
 
 		return s3Util.tempImgUpload(temp);
 	}
@@ -60,9 +62,36 @@ public class ProductServiceProcess implements ProductService {
 		model.addAttribute("list",
 				pRepo.findAll().stream()
 						.map(entity -> new ProductListDTO(entity).defImg(iRepo.findByProductAndDef(entity, true)
-								.orElse(ProductImageEntity.builder().bucketKey("/image/common/noimg.jpg").build()),domain))
+								.orElse(ProductImageEntity.builder().bucketKey("/images/common/noimg.jpg").build()),domain))
 						.collect(Collectors.toList()));
 
+	}
+
+	@Override
+	public void detailProcess(long no, Model model) {
+		ProductEntity result=pRepo.findById(no).orElseThrow();
+		model.addAttribute("pd", result);
+		
+		Optional<ProductImageEntity> defImg=iRepo.findByProductAndDef(result,true);
+		
+		if(defImg.isPresent())model.addAttribute("defImg", defImg.get());
+		List<ProductImageEntity> imgList=iRepo.findAllByProductAndDef(result,false);
+		if(!imgList.isEmpty())model.addAttribute("imgList", imgList);
+		
+	}
+
+	@Override
+	public void updateProcess(ProductSaveDTO dto) {
+		ProductEntity entity=pRepo.findById(dto.getPNo()).orElseThrow().update(dto);
+		pRepo.save(entity);
+		List<ProductImageEntity> list= iRepo.findAllByProduct(entity);
+		Object[] alist=list.toArray();
+		String[] tlist=dto.getTempKey();
+		for(int i=0; i<tlist.length; i++) {
+			System.out.println(alist[i].toString());
+			
+		}
+		
 	}
 
 }

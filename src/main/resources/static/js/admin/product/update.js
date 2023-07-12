@@ -1,16 +1,18 @@
 /**
  * 
  */
-
+$(function(){
+	delAdd($(".temp-img>input.hasImg"));
+	addImg();
+});
 
 function delAdd(inputTag){
 	var tag=`<button class="btn-del" type="button" onclick="delImg(this)">
 			사진삭제
 		</button>`
-	var change=$(inputTag).val()
-	console.log(change)
 	var exbtn=$(inputTag).parent().siblings(".btn-del").length
 	if(exbtn==0)$(inputTag).parents(".img-wrap").append(tag)
+	
 }
 
 
@@ -26,8 +28,8 @@ function delImg(deleteBtn){
 }
 
 
+
 function tempUpload(img) {
-	if($(img).val()===""||$(img).val()===null)return;
 	var fileData = $(img)[0].files[0];
 	var formData = new FormData();
 	formData.append("temp", fileData);
@@ -37,7 +39,8 @@ function tempUpload(img) {
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(header, token);
 	});
-	
+
+
 	$.ajax({
 		url: "/admin/product/temp-img",
 		type: "POST",
@@ -53,7 +56,7 @@ function tempUpload(img) {
 			
 			var def = $(img).parents(".img-wrap").find(".def").val();
 			if (def == "true") return;
-
+			
 			var addLength = $(".add-img>.line-wrap>.img-wrap").length;
 			console.log("추가이미지 개수:" + addLength);
 			var targetIdx = $(img).parents(".img-wrap").index()+1;
@@ -61,6 +64,7 @@ function tempUpload(img) {
 			//추가하면 안되는경우 
 			//1.태그가 5개가 완료된경우
 			//2. 5개만들기전 이전이미지를 수정하면
+			
 			if (addLength >= 5 || targetIdx < addLength) return;
 
 			var appendTag = `
@@ -72,8 +76,20 @@ function tempUpload(img) {
 			</div>
 			 `;
 			$(".line-wrap").append(appendTag);
-			
 		}
 	})
 
+}
+
+function addImg(){
+	var addLength = $(".add-img>.line-wrap>.img-wrap").length;
+	if (addLength >= 5) return;
+	var appendTag = `
+		 <div class="img-wrap">
+			<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this); "></label>
+			<input type="hidden" class="tempKey" name="tempKey">
+			<input type="hidden" class="newName" name="newName">
+			<input type="hidden" class="def" name="def" value="false">
+		</div>`;
+	$(".line-wrap").append(appendTag);
 }

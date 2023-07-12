@@ -35,7 +35,7 @@
 				<div class="input-area def-img">
 					<label>대표이미지</label>
 					<div class="img-wrap">
-						<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this)"></label>
+						<label class="temp-img"><input type="file" accept="image/*"  onchange="tempUpload(this);"></label>
 						<input type="hidden" class="tempKey" name="tempKey">
 						<input type="hidden" class="newName" name="newName">
 						<input type="hidden" class="def" name="def" value="true">
@@ -45,7 +45,7 @@
 					<label>상품이미지</label>
 					<div class="line-wrap">
 						<div class="img-wrap">
-							<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this)"></label>
+							<label class="temp-img"><input type="file" accept="image/*" onchange="tempUpload(this);"></label>
 							<input type="hidden" class="tempKey" name="tempKey">
 							<input type="hidden" class="newName" name="newName">
 							<input type="hidden" class="def" name="def" value="false">
@@ -60,7 +60,7 @@
 					<label>판매상태</label>
 					<span>판매가능</span>
 					<input type="radio" name="pStatus" checked="checked" value="true">
-					<span>판매불가</span>
+					<span>판매중지</span>
 					<input type="radio" name="pStatus" value="false">
 				</div>
 				<div class="input-area">

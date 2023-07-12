@@ -21,15 +21,20 @@ public class ProductListDTO {
 
 	private boolean status;
 
-	private LocalDateTime createDate;
+	private LocalDateTime createdDate;
 	
 	private String bucketKey;
 	
 	
 	
 	public ProductListDTO defImg(ProductImageEntity img,String domain) {
-		this.bucketKey= domain+img.getBucketKey();
-		return this;
+		if(img.getBucketKey()=="/images/common/noimg.jpg") {
+			this.bucketKey="/images/common/noimg.jpg";
+			return this;
+		}else {
+			this.bucketKey= domain+img.getBucketKey();
+			return this;			
+		}
 		
 	}
 
@@ -40,7 +45,7 @@ public class ProductListDTO {
 		this.price=entity.getPPrice();
 		this.stock=entity.getPStock();
 		this.status=entity.isPStatus();
-		this.createDate=entity.getCreatedDate();
+		this.createdDate=entity.getCreatedDate();
 	}
 	
 
