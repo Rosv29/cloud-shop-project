@@ -33,7 +33,11 @@ public class AdminController {
 		return "admin/category/create";
 	}
 	
-
+	@PostMapping("category/list")
+	public String categoryList(@RequestParam("cVal") long cVal,Model model) {
+		cService.listProcess(cVal,model);
+		return "common/category/list";
+	}
 	
 	/////////////////////상품관련///////////////////////
 	//상품등록 페이지이동

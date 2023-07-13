@@ -2,10 +2,37 @@
  * 
  */
 $(function(){
-
-
+	categoryShow($("#category1"))
+	
 })
-
+function categoryShow(cate){
+	var cVal=$(cate).val()
+	csrfSend()
+	console.log(cVal)
+	$.ajax({
+		url:"/admin/category/list",
+		type:"post",
+		data:{cVal:cVal},
+		success:function(result){
+			$(cate).append(result)
+		}
+	})
+}
+function categoryShow2(cate){
+	var cVal=$(cate).val()
+	console.log(cVal)
+	if(cVal==0||cVal=="")return;
+	
+	csrfSend()
+	$.ajax({
+		url:"/admin/category/list",
+		type:"post",
+		data:{cVal:cVal},
+		success:function(result){
+			$(cate).siblings("#category2").html(result)
+		}
+	})
+}
 
 
 function csrfSend(){
