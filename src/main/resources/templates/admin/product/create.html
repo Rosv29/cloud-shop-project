@@ -10,14 +10,17 @@
 			<form action="/admin/product/create" method="post">
 				<div class="input-area">
 					<label>1차카테고리</label>
-					<select>
-						<option value="">샘플</option>
+					<select id="category1" onchange="pdCategory2(this)">
+						<option value="0">1차카테고리</option>
+						<th:block>
+							
+						</th:block>
 					</select>
 				</div>
 				<div class="input-area">	
 					<label>2차카테고리</label>
-					<select>
-						<option value="">샘플</option>
+					<select id="category2" name="categoryName">
+						<option value="">2차카테고리</option>
 					</select>
 				</div>
 				<div class="input-area">

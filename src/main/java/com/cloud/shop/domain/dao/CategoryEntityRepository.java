@@ -15,7 +15,7 @@ public interface CategoryEntityRepository extends JpaRepository<CategoryEntity, 
 	List<CategoryEntity> findAllByParent(CategoryEntity entity);
 
 
-	CategoryEntity findByNo(long no);
+	Optional<CategoryEntity> findByNo(long no);
 
 
 }

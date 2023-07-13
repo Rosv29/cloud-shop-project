@@ -1,7 +1,35 @@
 /**
  * 
  */
-
+$(function(){
+	pdCategory($("#category1"))
+})
+function pdCategory(tag){
+	var tagVal=$(tag).val();
+	if(tagVal===null)tagVal=0;
+	csrfSend();
+	$.ajax({
+		url:"/admin/product/category",
+		type:"post",
+		data:{tagVal:tagVal},
+		success:function(result){
+			$(tag).html(result)
+		}
+	})
+}
+function pdCategory2(tag){
+	var tagVal=$(tag).val();
+	if(tagVal===null)tagVal=0;
+		csrfSend();
+	$.ajax({
+		url:"/admin/product/category",
+		type:"post",
+		data:{tagVal:tagVal},
+		success:function(result){
+			$("#category2").html(result)
+		}
+	})
+}
 
 function delAdd(inputTag){
 	var tag=`<button class="btn-del" type="button" onclick="delImg(this)">
@@ -29,13 +57,8 @@ function tempUpload(img) {
 	var fileData = $(img)[0].files[0];
 	var formData = new FormData();
 	formData.append("temp", fileData);
-
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(header, token);
-	});
 	
+	csrfSend();
 	$.ajax({
 		url: "/admin/product/temp-img",
 		type: "POST",
@@ -74,4 +97,12 @@ function tempUpload(img) {
 		}
 	})
 
+}
+function csrfSend(){
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+	
 }

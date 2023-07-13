@@ -1,10 +1,13 @@
 package com.cloud.shop.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.cloud.shop.domain.dao.CategoryEntityRepository;
 import com.cloud.shop.domain.dto.CategorySaveDTO;
+import com.cloud.shop.domain.entity.CategoryEntity;
 import com.cloud.shop.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,9 +30,12 @@ public class CategoryServiceProcess implements CategoryService {
 
 	@Override
 	public void saveProcess(CategorySaveDTO dto) {
-		repo.save(dto.toEntity(dto,repo.findByNo(dto.getParentNo())));
+		Optional<CategoryEntity> entity=repo.findByNo(dto.getParentNo());
+		repo.save(dto.toEntity(dto,entity.orElse(null)));
 		
 	}
+
+	
 
 
 

@@ -1,7 +1,9 @@
 package com.cloud.shop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cloud.shop.domain.dto.CategorySaveDTO;
 import com.cloud.shop.service.CategoryService;
@@ -18,6 +20,11 @@ public class CategoryController {
 	public String create(CategorySaveDTO dto) {
 		service.saveProcess(dto);
 		return "redirect:/admin/category/create";
-		
+	}
+	
+	@PostMapping("/admin/product/category")
+	public String product(@RequestParam("tagVal")long tagVal ,Model model) {
+		service.listProcess(tagVal,model);
+		return "admin/category/list";
 	}
 }
