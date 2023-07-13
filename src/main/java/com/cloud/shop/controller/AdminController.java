@@ -3,9 +3,15 @@ package com.cloud.shop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cloud.shop.service.CategoryService;
 import com.cloud.shop.service.ProductService;
+import com.cloud.shop.service.impl.CategoryServiceProcess;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,9 +20,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class AdminController {
 	
-	private final ProductService service;
+	private final ProductService pService;
+	private final CategoryService cService;
 	
-	@GetMapping("index")
+	@GetMapping("")
 	public String index() {
 		return "admin/index";
 	}
@@ -26,6 +33,7 @@ public class AdminController {
 		return "admin/category/create";
 	}
 	
+
 	
 	/////////////////////상품관련///////////////////////
 	//상품등록 페이지이동
@@ -36,7 +44,7 @@ public class AdminController {
 	//상품조회수정 페이지이동
 	@GetMapping("product/list")
 	public String productList(Model model) {
-		service.listProcess(model);
+		pService.listProcess(model);
 		return "admin/product/list";
 	}
 	

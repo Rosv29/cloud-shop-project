@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -27,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class S3Util {
 	private final AmazonS3Client client;
 
-	
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
 	@Value("${cloud.aws.s3.bucket.temp-path}")
@@ -37,9 +37,9 @@ public class S3Util {
 	@Value("${cloud.aws.s3.domain}")
 	private String domain;
 
-	public Map<String, String> tempImgUpload(Optional<MultipartFile> tempFile) {
-	
-		MultipartFile temp=tempFile.orElseThrow();
+	public Map<String, String> tempImgUpload(MultipartFile tempFile) {
+
+		MultipartFile temp = tempFile;
 		String newName = createNewFileName(temp.getOriginalFilename());
 		String tempKey = tempPath + newName;
 		Map<String, String> resultMap = new HashMap<>();
@@ -54,34 +54,33 @@ public class S3Util {
 			resultMap.put("imgUrl", imgUrl);
 			resultMap.put("newName", newName);
 			resultMap.put("tempKey", tempKey);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return resultMap;
 
 	}
-	
-	
-	
 
 	private String createNewFileName(String orgName) {
 		int idx = orgName.lastIndexOf(".");
 		return UUID.randomUUID().toString() + orgName.substring(idx); // 확장자
 	}
 
-
 	public void tempToUpload(String newName) {
-		String bucketKey=tempPath+newName;
-		String uploadKey=uploadPath+newName;
-		System.out.println("##"+newName);
-		System.out.println("###"+bucketKey);
-		System.out.println("####"+uploadKey);
-		CopyObjectRequest copyObjectRequest=new CopyObjectRequest(bucketName, bucketKey, bucketName, uploadKey);
+		String bucketKey = tempPath + newName;
+		String uploadKey = uploadPath + newName;
+		// System.out.println("##"+newName);
+		// System.out.println("###"+bucketKey);
+		// System.out.println("####"+uploadKey);
+		CopyObjectRequest copyObjectRequest = new CopyObjectRequest(bucketName, bucketKey, bucketName, uploadKey);
 		client.copyObject(copyObjectRequest.withCannedAccessControlList(CannedAccessControlList.PublicRead));
-		client.deleteObject(bucketName, bucketKey);		
+		client.deleteObject(bucketName, bucketKey);
 	}
 
+	public void updateImg(String bucketKey) {
+		client.deleteObject(bucketName, bucketKey);
+	}
 
 	public void clearTemp() {
 		// 템프 경로의 목록을 갖고와서 제거
@@ -103,15 +102,5 @@ public class S3Util {
 		client.deleteObject(bucketName, tempPath);
 
 	}
-
-
-
-
-
-
-
-
-
-
 
 }

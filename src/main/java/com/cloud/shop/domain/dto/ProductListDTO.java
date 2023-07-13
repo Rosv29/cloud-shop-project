@@ -3,6 +3,7 @@ package com.cloud.shop.domain.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.cloud.shop.domain.entity.CategoryEntity;
 import com.cloud.shop.domain.entity.ProductEntity;
 import com.cloud.shop.domain.entity.ProductImageEntity;
 
@@ -12,6 +13,8 @@ import lombok.Data;
 public class ProductListDTO {
 
 	private long no;
+	
+	private CategoryEntity category;
 	
 	private String name;
 
@@ -41,6 +44,7 @@ public class ProductListDTO {
 
 	public ProductListDTO(ProductEntity entity) {
 		this.no=entity.getPNo();
+		this.category=entity.getCategory();
 		this.name=entity.getPName();
 		this.price=entity.getPPrice();
 		this.stock=entity.getPStock();

@@ -7,8 +7,6 @@ function delAdd(inputTag){
 	var tag=`<button class="btn-del" type="button" onclick="delImg(this)">
 			사진삭제
 		</button>`
-	var change=$(inputTag).val()
-	console.log(change)
 	var exbtn=$(inputTag).parent().siblings(".btn-del").length
 	if(exbtn==0)$(inputTag).parents(".img-wrap").append(tag)
 }
@@ -18,7 +16,7 @@ function delImg(deleteBtn){
 	$(deleteBtn).siblings(".temp-img").css("background-image","url('')")
 	$(deleteBtn).siblings("input[type=hidden]:not('.def')").val('')
 	var count=$(".line-wrap>.img-wrap").length
-	if(count>1){
+	if(count>1 && $(deleteBtn).siblings(".def").val()=="false"){
 		$(deleteBtn).parent().remove()
 	}else{
 		$(deleteBtn).remove()		

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -44,6 +45,9 @@ public class ProductEntity extends BaseDateEntity{
 	@Column(nullable = false)
 	private boolean pStatus;
 
+	@ManyToOne
+	private CategoryEntity category;
+	
 	public ProductEntity update(ProductSaveDTO dto) {
 		if(!this.pName.equals(dto.getPName()))this.pName=dto.getPName();
 		if(!(this.pPrice==dto.getPPrice()))this.pPrice=dto.getPPrice();

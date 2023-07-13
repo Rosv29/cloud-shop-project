@@ -30,4 +30,12 @@ public class ProductImageEntity {
 	
 	@ManyToOne
 	private ProductEntity product;
+	
+	public ProductImageEntity update(String bucket, boolean tf) {
+		
+		this.bucketKey=bucket;
+		this.def=tf;
+		return this;	
+	}
+	
 }

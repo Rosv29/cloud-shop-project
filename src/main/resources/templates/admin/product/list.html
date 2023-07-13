@@ -8,6 +8,7 @@
 		<div class="wrap">
 			<table class="list-table" border="1">
 				<tr>
+					<th>카테고리</th>
 					<th>상품번호</th>
 					<th>상품명</th>
 					<th>대표이미지</th>
@@ -18,6 +19,10 @@
 					<th>상품수정/삭제</th>
 				</tr>
 				<tr th:each="dto:${list}">
+					<td>
+						<span th:text="${dto.category.name}"></span>
+						(<span th:text="${dto.category.no}"></span>)
+					</td>
 					<td th:text="${dto.no}"></td>
 					<td th:text="${dto.name}"></td>
 					<td>

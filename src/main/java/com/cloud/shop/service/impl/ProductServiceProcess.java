@@ -38,7 +38,7 @@ public class ProductServiceProcess implements ProductService {
 	
 
 	@Override
-	public Map<String, String> tempImgUpload(Optional<MultipartFile> temp) {
+	public Map<String, String> tempImgUpload(MultipartFile temp) {
 
 		return s3Util.tempImgUpload(temp);
 	}
@@ -49,7 +49,7 @@ public class ProductServiceProcess implements ProductService {
 		for (int i = 0; i < dto.getTempKey().length; i++) {
 			if (dto.getTempKey()[i] == null || dto.getTempKey()[i] == "")continue;
 			iRepo.save(ProductImageEntity.builder()
-					.bucketKey(uploadPath+dto.getNewName()[i])
+					.bucketKey(dto.url(uploadPath, i))
 					.def(dto.getDef()[i])
 					.product(entity).build());
 			s3Util.tempToUpload(dto.getNewName()[i]);
@@ -85,13 +85,47 @@ public class ProductServiceProcess implements ProductService {
 		ProductEntity entity=pRepo.findById(dto.getPNo()).orElseThrow().update(dto);
 		pRepo.save(entity);
 		List<ProductImageEntity> list= iRepo.findAllByProduct(entity);
-		Object[] alist=list.toArray();
-		String[] tlist=dto.getTempKey();
-		for(int i=0; i<tlist.length; i++) {
-			System.out.println(alist[i].toString());
-			
+		//변경된이미지개수 세기
+		int changeCount=0;
+		
+		for(int i=0; i<dto.getTempKey().length;i++) {
+			if(dto.getTempKey()[i]!="")changeCount++;
 		}
 		
+		//기존 이미지 개수 >= 변경된 이미지 개수
+		for(int i=0; i<dto.getTempKey().length; i++) {
+			if((dto.getTempKey()[i]!="")&&list.size()>=changeCount) {
+				//기존 이미지가 최대개수가 아니고 추가이미지가 생겼을때
+				if(list.size()+1 <dto.getTempKey().length) {
+					iRepo.save(ProductImageEntity.builder()
+							.bucketKey(dto.url(uploadPath, i))
+							.def(dto.getDef()[i])
+							.product(entity)
+							.build());
+					
+					s3Util.tempToUpload(dto.getNewName()[i]);
+					
+				}else {
+					s3Util.updateImg(list.get(i).getBucketKey());
+					iRepo.save(list.get(i).update(dto.url(uploadPath, i),dto.getDef()[i]));
+					s3Util.tempToUpload(dto.getNewName()[i]);
+				}
+		//기존 이미지 개수 < 변경된 이미지 개수		
+			}else if((dto.getTempKey()[i]!="")&&list.size()<changeCount) {
+				if(i<list.size()) {
+					s3Util.updateImg(list.get(i).getBucketKey());
+					iRepo.save(list.get(i).update(dto.url(uploadPath, i),dto.getDef()[i]));
+					s3Util.tempToUpload(dto.getNewName()[i]);
+				}else {
+					iRepo.save(ProductImageEntity.builder()
+							.bucketKey(dto.url(uploadPath, i))
+							.def(dto.getDef()[i])
+							.product(entity)
+							.build());		
+					s3Util.tempToUpload(dto.getNewName()[i]);
+				}
+			}
+		}
+		s3Util.clearTemp();
 	}
-
 }

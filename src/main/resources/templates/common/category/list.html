@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org">
+	<th:block th:each="cate:${list}">
+		<option th:text="${cate.name}" th:value="${cate.no}">
+	</th:block>
+</html>

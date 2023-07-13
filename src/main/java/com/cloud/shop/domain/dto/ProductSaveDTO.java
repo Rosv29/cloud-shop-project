@@ -1,6 +1,8 @@
 package com.cloud.shop.domain.dto;
 
 import com.cloud.shop.domain.entity.ProductEntity;
+import com.cloud.shop.domain.entity.ProductImageEntity;
+
 import lombok.Data;
 
 @Data
@@ -30,4 +32,7 @@ public class ProductSaveDTO {
 	
 	private boolean[] def;
 
+	public String url(String path,int i) {
+		return path+newName[i];
+	}
 }

@@ -13,7 +13,7 @@
 			</div>
 			<div sec:authorize="isAuthenticated()">
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<a href="/admin/index">관리자페이지</a>
+					<a href="/admin">관리자페이지</a>
 				</div>
 				<span sec:authentication="principal.name"></span>
 				<span sec:authentication="principal.korName"></span>

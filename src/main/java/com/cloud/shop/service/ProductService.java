@@ -10,7 +10,7 @@ import com.cloud.shop.domain.dto.ProductSaveDTO;
 
 public interface ProductService {
 
-	Map<String, String> tempImgUpload(Optional<MultipartFile> temp);
+	Map<String, String> tempImgUpload(MultipartFile temp);
 
 	void saveProcess(ProductSaveDTO dto);
 

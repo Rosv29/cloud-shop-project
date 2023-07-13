@@ -24,7 +24,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("/admin/product/temp-img")
-	public Map<String,String> tempImg(Optional<MultipartFile> temp) {
+	public Map<String,String> tempImg(MultipartFile temp) {
 		return service.tempImgUpload(temp);
 		
 	}

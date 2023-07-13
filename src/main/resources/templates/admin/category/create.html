@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
 	<head>
-	
+		<script src="/js/admin/category/create.js"></script>
 	</head>
 	<main>
 		<div class="wrap">
 			<h1>카테고리 등록 페이지</h1>
 			<form>
-				
+				<select id="category1" name="category" onchange="showCategory2(this)">
+					<option value="">1차카테고리</option>
+				</select>
+				<select id="category2" name="category">
+					<option value="">2차카테고리</option>
+					
+				</select>
 			</form>
 		</div>
 	</main>
