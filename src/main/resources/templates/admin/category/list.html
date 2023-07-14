@@ -1,6 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="//www.thymeleaf.org">
-	<th:block th:each="cate:${list}">
-		<option th:text="${cate.name}" th:value="${cate.no}">
-	</th:block>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<script src="/js/admin/category/list.js"></script>
+		<link rel="stylesheet" href="/css/admin/category/list.css">
+	</head>
+	<main>
+		<div class="wrap">
+			<h1>카테고리 관리 페이지</h1>
+			<div class="list">
+				
+			</div>
+		</div>
+	</main>
 </html>

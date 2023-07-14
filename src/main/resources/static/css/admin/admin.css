@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  width: 250px;
+  min-width: 250px;
   background-color: #3f4b5c;
   color: #fff;
   min-height: 100vh;

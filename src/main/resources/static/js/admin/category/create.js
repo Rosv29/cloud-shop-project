@@ -10,7 +10,7 @@ function categoryShow(cate){
 	csrfSend()
 	console.log(cVal)
 	$.ajax({
-		url:"/admin/category/list",
+		url:"/admin/category/show",
 		type:"post",
 		data:{cVal:cVal},
 		success:function(result){
@@ -25,7 +25,7 @@ function categoryShow2(cate){
 	
 	csrfSend()
 	$.ajax({
-		url:"/admin/category/list",
+		url:"/admin/category/show",
 		type:"post",
 		data:{cVal:cVal},
 		success:function(result){

@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloud.shop.domain.dao.CategoryEntityRepository;
 import com.cloud.shop.domain.dao.ProductEntityRepository;
 import com.cloud.shop.domain.dao.ProductImageEntityRepository;
 import com.cloud.shop.domain.dto.ProductListDTO;
 import com.cloud.shop.domain.dto.ProductSaveDTO;
+import com.cloud.shop.domain.entity.CategoryEntity;
 import com.cloud.shop.domain.entity.ProductEntity;
 import com.cloud.shop.domain.entity.ProductImageEntity;
 import com.cloud.shop.service.ProductService;
@@ -28,6 +30,7 @@ public class ProductServiceProcess implements ProductService {
 	private final S3Util s3Util;
 
 	private final ProductEntityRepository pRepo;
+	private final CategoryEntityRepository cRepo;
 
 	private final ProductImageEntityRepository iRepo;
 
@@ -45,7 +48,10 @@ public class ProductServiceProcess implements ProductService {
 
 	@Override
 	public void saveProcess(ProductSaveDTO dto) {
-		ProductEntity entity = pRepo.save(dto.toProduct());
+		CategoryEntity cate=cRepo.findById(dto.getCategoryNo()).orElseThrow();
+		
+		ProductEntity entity = pRepo.save(dto.toProduct(cate));
+		
 		for (int i = 0; i < dto.getTempKey().length; i++) {
 			if (dto.getTempKey()[i] == null || dto.getTempKey()[i] == "")continue;
 			iRepo.save(ProductImageEntity.builder()
@@ -82,7 +88,8 @@ public class ProductServiceProcess implements ProductService {
 
 	@Override
 	public void updateProcess(ProductSaveDTO dto) {
-		ProductEntity entity=pRepo.findById(dto.getPNo()).orElseThrow().update(dto);
+		CategoryEntity cate=cRepo.findById(dto.getCategoryNo()).orElseThrow();
+		ProductEntity entity=pRepo.findById(dto.getPNo()).orElseThrow().update(dto,cate);
 		pRepo.save(entity);
 		List<ProductImageEntity> list= iRepo.findAllByProduct(entity);
 		//변경된이미지개수 세기
@@ -127,5 +134,15 @@ public class ProductServiceProcess implements ProductService {
 			}
 		}
 		s3Util.clearTemp();
+	}
+
+	@Override
+	public void deleteProcess(long pno) {
+		ProductEntity entity=pRepo.findById(pno).orElseThrow();
+		List<ProductImageEntity> list= iRepo.findAllByProduct(entity);
+		list.forEach(dto->s3Util.updateImg(dto.getBucketKey()));
+		list.forEach(dto->iRepo.delete(dto));
+		pRepo.delete(entity);
+		
 	}
 }

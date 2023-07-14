@@ -32,11 +32,22 @@ public class AdminController {
 	public String categoryCreate() {
 		return "admin/category/create";
 	}
-	
-	@PostMapping("category/list")
+	//카테고리수정 페이지이동
+	@GetMapping("category/list")
+	public String categoryList() {
+		return "admin/category/list";
+	}
+	//비동기 카테고리 요청
+	@GetMapping("category/list/show")
+	public String categoryListShow(Model model) {
+		cService.listPage(model);
+		return "admin/category/list-show";
+	}
+	//카테고리등록시 비동기로 카테고리 리스트 불러오기
+	@PostMapping("category/show")
 	public String categoryList(@RequestParam("cVal") long cVal,Model model) {
 		cService.listProcess(cVal,model);
-		return "common/category/list";
+		return "admin/category/show";
 	}
 	
 	/////////////////////상품관련///////////////////////

@@ -20,4 +20,6 @@ public interface ProductService {
 
 	void updateProcess(ProductSaveDTO dto);
 
+	void deleteProcess(long pno);
+
 }

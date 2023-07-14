@@ -10,14 +10,15 @@
 			<form action="/admin/product/update" method="post">
 				<div class="input-area">
 					<label>1차카테고리</label>
-					<select name="category1">
-						<option value="">샘플</option>
+					<select id="category1" onchange="pdCategory2(this)">
+						<option value="0">1차카테고리</option>
 					</select>
 				</div>
 				<div class="input-area">	
 					<label>2차카테고리</label>
-					<select>
-						<option value="">샘플</option>
+					<select id="category2" name="categoryNo">
+						<option selected="selected" th:text="${pd.category.name}" th:value="${pd.category.no}">
+						<option value="">2차카테고리</option>
 					</select>
 				</div>
 				<div class="input-area">
@@ -80,9 +81,10 @@
 				</div>
 				<div class="input-area">
 					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-					<input type="hidden" name="pNo" th:value="${pd.pNo}">
+					<input id="pNo" type="hidden" name="pNo" th:value="${pd.pNo}">
 					<button type="submit">수정</button>
-					<button type="button" class="del-btn">삭제</button>
+					
+					<button type="button" onclick = "location.href ='/admin/product/list'">취소</button>
 				</div>
 			</form>
 		</div>

@@ -21,7 +21,7 @@
 				<th:block th:if="${list}">
 					<tr th:each="dto:${list}">
 						<td>
-							<span th:text="${dto.category.name}"></span>
+							<span th:text="${dto.category} !=null ?${dto.category.name}:없음"></span>
 							(<span th:text="${dto.category.no}"></span>)
 						</td>
 						<td th:text="${dto.no}"></td>
@@ -36,7 +36,7 @@
 						<td>
 							<a th:href="|/admin/product/update/${dto.no}|">수정</a>
 							<span>/</span>
-							<a href="#">삭제</a>
+							<a th:href="|/admin/product/delete/${dto.no}|">삭제</a>
 						</td>					
 					</tr>
 				</th:block>

@@ -10,6 +10,12 @@ public interface CategoryService {
 
 	void saveProcess(CategorySaveDTO dto);
 
+	void listPage(Model model);
+
+	void updateProcess(String val, long val2);
+
+	void deleteProcess(long cateno);
+
 
 
 

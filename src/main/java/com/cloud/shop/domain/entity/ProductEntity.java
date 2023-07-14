@@ -48,14 +48,16 @@ public class ProductEntity extends BaseDateEntity{
 	@ManyToOne
 	private CategoryEntity category;
 	
-	public ProductEntity update(ProductSaveDTO dto) {
+	public ProductEntity update(ProductSaveDTO dto, CategoryEntity cate) {
 		if(!this.pName.equals(dto.getPName()))this.pName=dto.getPName();
 		if(!(this.pPrice==dto.getPPrice()))this.pPrice=dto.getPPrice();
 		if(!(this.pStock==dto.getPStock()))this.pStock=dto.getPStock();
 		if(!this.pContent.equals(dto.getPContent()))this.pContent=dto.getPContent();
 		if(this.pStatus!=dto.isPStatus())this.pStatus=dto.isPStatus();
+		if(!(this.category==cate))this.category=cate;
 		
 		return this;
 	}
+
 	
 }

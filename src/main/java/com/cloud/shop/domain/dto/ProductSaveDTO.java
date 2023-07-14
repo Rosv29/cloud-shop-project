@@ -1,5 +1,6 @@
 package com.cloud.shop.domain.dto;
 
+import com.cloud.shop.domain.entity.CategoryEntity;
 import com.cloud.shop.domain.entity.ProductEntity;
 import com.cloud.shop.domain.entity.ProductImageEntity;
 
@@ -20,8 +21,11 @@ public class ProductSaveDTO {
 
 	private boolean pStatus;
 
-	public ProductEntity toProduct() {
+	private long categoryNo;
+	
+	public ProductEntity toProduct(CategoryEntity cate) {
 		return ProductEntity.builder().pName(pName).pPrice(pPrice).pStock(pStock).pStatus(pStatus).pContent(pContent)
+				.category(cate)
 				.build();
 	}
 

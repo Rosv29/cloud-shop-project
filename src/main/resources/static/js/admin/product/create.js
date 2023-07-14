@@ -22,7 +22,7 @@ function pdCategory2(tag){
 	if(tagVal===null)tagVal=0;
 		csrfSend();
 	$.ajax({
-		url:"/admin/product/category",
+		url:"/admin/product/category2",
 		type:"post",
 		data:{tagVal:tagVal},
 		success:function(result){

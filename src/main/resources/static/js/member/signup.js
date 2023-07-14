@@ -184,6 +184,7 @@ function verifyCode(){
 		success(result) {
 			if(result==codeVal){
 				$("#emailCheck").siblings(".msg").text("인증이 완료되었습니다.").css("color", "green");
+				$("#email").removeAttr("onfocusout")
 				$(".emailCheck-wrap > button").prop("disabled",true)
 				$("#emailCheck").prop("readonly",true)
 				$("#emailCheck").siblings(".checkInput").prop("checked",true)
