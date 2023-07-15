@@ -4,6 +4,33 @@
 $(function(){
 	pdCategory($("#category1"))
 })
+function submitCheck(){
+	var cate=$("#category2").val()
+	var name=$("#pName").val()
+	var price=$("#pPrice").val()
+	var stock=$("#pStock").val()
+	var content=$("#pContent").val()
+	if(cate==null||cate==""){
+		alert("카테고리를 지정해주세요")
+		return false;
+	}else if(name==null||name==""){
+		alert("상품명을 작성해주세요")
+		return false;
+	}else if(price==null||price==""){
+		alert("상품가격을 지정해주세요")
+		return false;
+	}else if(stock==null||stock==""){
+		alert("상품재고수량을 지정해주세요")
+		return false;
+	}else if(content==null||content==""){
+		alert("상품설명을 작성해주세요")
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
 function pdCategory(tag){
 	var tagVal=$(tag).val();
 	if(tagVal===null)tagVal=0;

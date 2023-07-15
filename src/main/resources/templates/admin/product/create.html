@@ -7,7 +7,7 @@
 	<main>
 		<h1>상품등록 페이지</h1>
 		<div class="form-area wrap">
-			<form action="/admin/product/create" method="post">
+			<form action="/admin/product/create" method="post" onsubmit="return submitCheck()">
 				<div class="input-area">
 					<label>1차카테고리</label>
 					<select id="category1" onchange="pdCategory2(this)">
@@ -22,15 +22,15 @@
 				</div>
 				<div class="input-area">
 					<label>상품명</label>
-					<input name="pName" type="text" placeholder="상품명">
+					<input id="pName" name="pName" type="text" placeholder="상품명">
 				</div>
 				<div class="input-area">
 					<label>상품가격</label>
-					<input name="pPrice" type="text" placeholder="상품가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+					<input id="pPrice" name="pPrice" type="text" placeholder="상품가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
 				</div>
 				<div class="input-area">
 					<label>상품재고</label>
-					<input name="pStock" type="text" placeholder="재고수량" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+					<input id="pStock" name="pStock" type="text" placeholder="재고수량" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
 				</div>
 				<div class="input-area def-img">
 					<label>대표이미지</label>
@@ -54,7 +54,7 @@
 				</div>
 				<div class="input-area">
 					<label>상품설명</label>
-					<textarea name="pContent" rows="5" cols="50"></textarea>
+					<textarea id="pContent" name="pContent" rows="5" cols="50"></textarea>
 				</div>
 				<div class="input-area">
 					<label>판매상태</label>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
 	<head>
-		
+		<link rel="stylesheet" href="/css/common/index.css">"
 	</head>
 	<main>
-		<p class="title">인덱스페이지</p>
+		<p class="title">상품목록</p>
 		<div class="wrap flex">
-			<div th:if="${list}" th:each="dto:${list}">
+			<a href="#" class="pd-div" th:if="${list}" th:each="dto:${list}">
+				<div class="img-wrap">
+					<img th:src="${dto.bucketKey}"></img>
+				</div>	
 				<p th:text="${dto.category.name}"></p>				
 				<p th:text="${dto.name}"></p>
-				<img th:src="${dto.bucketKey}" width="200px" height="200px"></img>
 				<p th:text="${#numbers.formatInteger(dto.price,0,'COMMA')}+원"></p>
-			</div>
+			</a>
 		</div>
 	</main>
 </html>
