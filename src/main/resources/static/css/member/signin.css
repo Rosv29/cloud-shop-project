@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 
-form>div{
+
+main form>div{
 	margin: 0.5em 0;
 }
 
@@ -28,6 +29,7 @@ form>div{
 	justify-content:center;
 	align-items: center;
 	margin-top: 1.5em;
+	cursor: pointer;
 }
 
 .mem-sup{

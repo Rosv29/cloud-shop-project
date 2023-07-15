@@ -13,7 +13,7 @@ public class WebSecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.antMatchers("/css/**","/js/**","/images/**","/webjars/**").permitAll()
-				.antMatchers("/member/**").permitAll()
+				.antMatchers("/member/**","/common/**").permitAll()
 				.antMatchers("/").permitAll()
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()

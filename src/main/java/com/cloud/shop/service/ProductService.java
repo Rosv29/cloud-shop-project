@@ -22,4 +22,6 @@ public interface ProductService {
 
 	void deleteProcess(long pno);
 
+	void findAllProcess(Model model);
+
 }

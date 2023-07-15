@@ -47,10 +47,17 @@ public class ProductController {
 		service.updateProcess(dto);
 		return "redirect:/admin/product/list";	
 	}
+	
 	@GetMapping("/admin/product/delete/{no}")
 	public String productDelete(@PathVariable("no") long pno) {
 		service.deleteProcess(pno);
 		return "redirect:/admin/product/list";
-		
 	}
+	
+	@PostMapping("/common/search")
+	public String search(String searchName,Model model) {
+		
+		return "common/search";
+	}
+	
 }

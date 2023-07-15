@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
 	<head>
-
+		
 	</head>
 	<main>
-		<h1>인덱스페이지</h1>
+		<p class="title">인덱스페이지</p>
+		<div class="wrap flex">
+			<div th:if="${list}" th:each="dto:${list}">
+				<p th:text="${dto.category.name}"></p>				
+				<p th:text="${dto.name}"></p>
+				<img th:src="${dto.bucketKey}" width="200px" height="200px"></img>
+				<p th:text="${#numbers.formatInteger(dto.price,0,'COMMA')}+원"></p>
+			</div>
+		</div>
 	</main>
 </html>
