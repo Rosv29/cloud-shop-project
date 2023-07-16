@@ -44,7 +44,7 @@ public class ProductEntity extends BaseDateEntity{
 	@Column(nullable = false)
 	private int pStock;
 	
-	@Column(nullable = false)
+	@Column(columnDefinition = "text")
 	private String pContent;
 	
 	@Column(nullable = false)

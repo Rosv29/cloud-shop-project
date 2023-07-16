@@ -86,6 +86,15 @@ public class ProductServiceProcess implements ProductService {
 	}
 
 	@Override
+	public void detailProcess2(long no, Model model) {
+		ProductEntity result = pRepo.findById(no).orElseThrow();
+		model.addAttribute("pd", result);
+		
+		List<ProductImageEntity> imgs= iRepo.findAllByProduct(result);
+		model.addAttribute("imgs",imgs);
+	}
+	
+	@Override
 	public void updateProcess(ProductSaveDTO dto) {
 		CategoryEntity cate = cRepo.findById(dto.getCategoryNo()).orElseThrow();
 		ProductEntity entity = pRepo.findById(dto.getPNo()).orElseThrow().update(dto, cate);
@@ -148,4 +157,6 @@ public class ProductServiceProcess implements ProductService {
 				.collect(Collectors.toList()));
 
 	}
+
+
 }

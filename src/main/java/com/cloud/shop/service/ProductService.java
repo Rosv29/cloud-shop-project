@@ -24,4 +24,6 @@ public interface ProductService {
 
 	void findAllProcess(Model model);
 
+	void detailProcess2(long no, Model model);
+
 }

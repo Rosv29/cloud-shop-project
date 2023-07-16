@@ -18,10 +18,11 @@ $(function() {
 		$("#confirm-password").siblings(".checkInput").prop("checked",false)
 	})
 	$("#confirm-password").change(function(){
-		$("#confirm-password").siblings(".checkInput").prop("checked",false)
+		$("#confirm-password").siblings(".checkInput").prop("disabled",true)
 	})
-})
 
+	
+})
 
 //id정규식검사 -> 성공하면 id중복체크
 function regexId() {
@@ -79,6 +80,7 @@ function regexEmail() {
 		checkEmail(emailVal);
 	} else {
 		$("#email").siblings(".msg").text("잘못된 이메일 형식입니다.").css("color", "red");
+		$(".email-wrap > button").prop("disabled",true)
 	}
 }
 function regexPhone(){
@@ -136,6 +138,7 @@ function checkEmail(emailVal){
 				$(".email-wrap > button").prop("disabled",false)
 			} else {
 				$("#email").siblings(".msg").text("이미 존재하는 이메일입니다.").css("color", "red");
+				$(".email-wrap > button").prop("disabled",true)
 			}
 		}
 	})
