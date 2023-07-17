@@ -1,65 +1,72 @@
 /**
  * 
  */
-$(function(){
+$(function() {
 	delAdd($(".temp-img>input.hasImg"));
 	addImg();
 	pdCategory($("#category1"))
 });
 
 
-function pdCategory(tag){
-	var tagVal=$(tag).val();
-	if(tagVal===null)tagVal=0;
+function pdCategory(tag) {
+	var tagVal = $(tag).val();
+	if (tagVal === null) tagVal = 0;
 	csrfSend();
 	$.ajax({
-		url:"/admin/product/category",
-		type:"post",
-		data:{tagVal:tagVal},
-		success:function(result){
+		url: "/admin/product/category",
+		type: "post",
+		data: { tagVal: tagVal },
+		success: function(result) {
 			$(tag).html(result)
 		}
 	})
 }
-function pdCategory2(tag){
-	var tagVal=$(tag).val();
-	if(tagVal===null)tagVal=0;
-		csrfSend();
+function pdCategory2(tag) {
+	var tagVal = $(tag).val();
+	if (tagVal === null) tagVal = 0;
+	csrfSend();
 	$.ajax({
-		url:"/admin/product/category2",
-		type:"post",
-		data:{tagVal:tagVal},
-		success:function(result){
+		url: "/admin/product/category2",
+		type: "post",
+		data: { tagVal: tagVal },
+		success: function(result) {
 			$("#category2").html(result)
 		}
 	})
 }
 
-function delAdd(inputTag){
-	var tag=`<button class="btn-del" type="button" onclick="delImg(this)">
+function delAdd(inputTag) {
+	var tag = `<button class="btn-del" type="button" onclick="delImg(this)">
 			사진삭제
 		</button>`
-	var exbtn=$(inputTag).parent().siblings(".btn-del").length
-	if(exbtn==0)$(inputTag).parents(".img-wrap").append(tag)
-	
+	var exbtn = $(inputTag).parent().siblings(".btn-del").length
+	if (exbtn == 0) $(inputTag).parents(".img-wrap").append(tag)
+
 }
 
 
-function delImg(deleteBtn){
-	$(deleteBtn).siblings(".temp-img").css("background-image","url('')")
+function delImg(deleteBtn) {
+	$(deleteBtn).siblings(".temp-img").css("background-image", "url('')")
 	$(deleteBtn).siblings("input[type=hidden]:not('.def')").val('')
-	var count=$(".line-wrap>.img-wrap").length
-	if(count>1 && $(deleteBtn).siblings(".def").val()=="false"){
-		$(deleteBtn).parent().remove()
-	}else{
-		$(deleteBtn).remove()		
+	var count = $(".line-wrap>.img-wrap").length
+	var count2 = $(".line-wrap>.img-wrap>.btn-del").length
+	if (count > 1 && $(deleteBtn).siblings(".def").val() == "false") {
+		if (count == 5 && count2==5) {
+			$(deleteBtn).parent().remove()
+			addImg()
+		}else{
+			$(deleteBtn).parent().remove()
+		}
+	}
+	else {
+		$(deleteBtn).remove()
 	}
 }
 
 
 
 function tempUpload(img) {
-	if($(img).val()===""||$(img).val()===null)return;
+	if ($(img).val() === "" || $(img).val() === null) return;
 	var fileData = $(img)[0].files[0];
 	var formData = new FormData();
 	formData.append("temp", fileData);
@@ -83,18 +90,18 @@ function tempUpload(img) {
 			$(img).parents(".img-wrap").find(".newName").val(result.newName);
 
 			delAdd(img)
-			
+
 			var def = $(img).parents(".img-wrap").find(".def").val();
 			if (def == "true") return;
-			
+
 			var addLength = $(".add-img>.line-wrap>.img-wrap").length;
 			console.log("추가이미지 개수:" + addLength);
-			var targetIdx = $(img).parents(".img-wrap").index()+1;
+			var targetIdx = $(img).parents(".img-wrap").index() + 1;
 			console.log("수정하는 이미지 위치:" + targetIdx);
 			//추가하면 안되는경우 
 			//1.태그가 5개가 완료된경우
 			//2. 5개만들기전 이전이미지를 수정하면
-			
+
 			if (addLength >= 5 || targetIdx < addLength) return;
 
 			var appendTag = `
@@ -111,7 +118,7 @@ function tempUpload(img) {
 
 }
 
-function addImg(){
+function addImg() {
 	var addLength = $(".add-img>.line-wrap>.img-wrap").length;
 	if (addLength >= 5) return;
 	var appendTag = `
@@ -123,11 +130,11 @@ function addImg(){
 		</div>`;
 	$(".line-wrap").append(appendTag);
 }
-function csrfSend(){
+function csrfSend() {
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(header, token);
 	});
-	
+
 }

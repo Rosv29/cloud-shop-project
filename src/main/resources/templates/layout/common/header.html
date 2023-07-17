@@ -17,7 +17,7 @@
 		<div>
 			<a href="#">회원정보</a>
 		</div>
-		<form action="logout" method="post">
+		<form action="/logout" method="post">
 			<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			<label>로그아웃<button id="logout"></button></label>
 		</form>

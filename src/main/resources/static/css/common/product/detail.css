@@ -115,7 +115,7 @@ main>.wrap {
 	justify-content: end;
 }
 
-.btn-wrap > button{
+.btn-wrap  button{
 	margin: 0 20px;
 	width: 150px;
 	height: 70px;

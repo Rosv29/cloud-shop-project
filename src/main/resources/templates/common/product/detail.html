@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+<html xmlns:th="//www.thymeleaf.org" xmlns:sec="//www.thymeleaf.org/extras/spring-security" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
 	<head>
 		<link rel="stylesheet" href="/css/common/product/detail.css">
 		<script src="/js/common/product/detail.js"></script>
@@ -53,14 +53,17 @@
 		 				<input  class="price" type="hidden" th:value="${pd.pPrice}">
 		 				<input  class="amount" type="hidden" th:value="${pd.pPrice}">
 		 				<input  class="postM" type="hidden" value="3000">
-		 				<button type="button">장바구니</button>
-		 				<button type="button" onclick="pay(this)">구매하기</button>
+		 				<th:block>
+			 				<button type="button">장바구니</button>
+			 				<button sec:authorize="isAuthenticated()" type="button" onclick="pay(this)">구매하기</button>
+			 				<a sec:authorize="isAnonymous()" href="/member/signin"><button type="button">구매하기</button></a>
+			 			</th:block>
 					</li>
 		 		</ul>
 	 		</div>
 		 	<div class="detail-content">
 			<span>상품정보</span>
-		 	 <textarea >[(${pd.pContent})]</textarea>
+		 	 <textarea>[(${pd.pContent})]</textarea>
 		 	</div>
 		</div>
 	</main>
