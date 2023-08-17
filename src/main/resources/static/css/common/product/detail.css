@@ -19,7 +19,6 @@ main>.wrap {
 
 .flex {
 	display: flex;
-	align-items: flex-start;
 }
 
 .detail-info {
