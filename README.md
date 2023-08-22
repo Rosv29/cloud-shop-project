@@ -14,4 +14,4 @@
 ### 제품구매 시 수량 및 가격 반영되서 결제가능하게 처리
 
 # 팀프로젝트
-## git link: github.com/balancekim/green-six
+## git link: http://github.com/balancekim/green-six
