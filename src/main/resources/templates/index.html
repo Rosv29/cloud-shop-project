@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/common/index.css">
+	</head>
+	<main>
+		<p class="title">상품목록</p>
+		<div class="wrap flex">
+			<a th:href="|/common/product/${dto.no}|" class="pd-div" th:if="${list}" th:each="dto:${list}">
+				<div class="img-wrap">
+					<img th:src="${dto.bucketKey}"></img>
+				</div>	
+				<p th:text="${dto.category.name}" style="color: #a9a9a9;"></p>				
+				<p th:text="${dto.name}"></p>
+				<p th:text="${#numbers.formatInteger(dto.price,0,'COMMA')}+원"></p>
+			</a>
+		</div>
+	</main>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/member/signin.css">
+	</head>
+	<main>
+		<div>
+			<p class="title">로그인</p>
+		</div>
+		<div class="signin-area">
+			<p class="err" th:if="${param.error}">로그인 정보가 틀렸습니다.</p>
+			<form action="/member/signin" method="post">
+				<div>
+					<input type="text" name="id" placeholder="아이디">
+				</div>
+				<div>
+					<input type="password" name="password" placeholder="비밀번호">
+				</div>
+				<div class="mem-sup">
+					<a href="#">아이디 찾기</a>
+					<span class="bar-vert"></span>
+					<a href="#">비밀번호 찾기</a>
+				</div>
+				<div>
+					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<button class="btn-submit">로그인</button>
+				</div>
+			</form>
+		</div>
+	</main>
+</html>

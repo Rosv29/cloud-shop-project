@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+form > label{
+	display: block;
+}
+
+form > select,input{
+	font-size: 14px;
+	width: 300px;
+	height: 40px;
+}
+
+form > div > button{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+}

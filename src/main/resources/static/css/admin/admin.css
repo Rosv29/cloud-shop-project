@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+.flex {
+	display: flex;	
+}
+
+body {
+	font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+	margin: 0 auto;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	width: 250px;
+	min-width: 250px;
+	background-color: #3f4b5c;
+	color: #fff;
+	min-height: 100vh;
+}
+
+.wrap {
+	padding: 20px;
+}
+
+header a {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.menu-wrap {
+	margin-top: 20px;
+}
+
+.menu-title {
+	padding: 10px 0;
+	font-weight: bold;
+	color: gray;
+}
+
+.menu-link div {
+	padding: 5px 0;
+}
+
+.menu-link a {
+	display: block;
+}

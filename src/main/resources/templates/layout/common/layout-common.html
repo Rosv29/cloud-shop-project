@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:fragment="layout(head, main)">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/common/common.css">
+		<link rel="stylesheet" href="/css/common/header.css">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<th:block th:replace="${head}" />
+	</head>
+	<body>
+		<th:block th:insert="~{layout/common/header}" />
+		<th:block th:replace="${main}" />
+		<th:block th:insert="~{layout/common/footer}" />
+	</body>
+</html>

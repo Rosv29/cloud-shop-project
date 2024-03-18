@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/admin/product/update.css">
+		<script src="/js/admin/product/update.js"></script>
+	</head>
+	<main>
+		<h1>상품수정 페이지</h1>
+		<div class="form-area wrap">
+			<form action="/admin/product/update" method="post">
+				<div class="input-area">
+					<label>1차카테고리</label>
+					<select id="category1" onchange="pdCategory2(this)">
+						<option value="0">1차카테고리</option>
+					</select>
+				</div>
+				<div class="input-area">	
+					<label>2차카테고리</label>
+					<select id="category2" name="categoryNo">
+						<option selected="selected" th:text="${pd.category.name}" th:value="${pd.category.no}">
+						<option value="">2차카테고리</option>
+					</select>
+				</div>
+				<div class="input-area">
+					<label>상품명</label>
+					<input name="pName" type="text" placeholder="상품명" th:value="${pd.pName}">
+				</div>
+				<div class="input-area">
+					<label>상품가격</label>
+					<input name="pPrice" type="text" placeholder="상품가격" th:value="${pd.pPrice}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+				</div>
+				<div class="input-area">
+					<label>상품재고</label>
+					<input name="pStock" type="text" placeholder="재고수량" th:value="${pd.pStock}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+				</div>
+				<div class="input-area def-img">
+					<label>대표이미지</label>
+					<div class="img-wrap">
+						<label class="temp-img" th:if="${defImg}" th:style="'background-image:url(//mycloud-shop-bucket.s3.ap-northeast-2.amazonaws.com/'+ ${defImg.bucketKey} + ');'">
+							<input class="hasImg" type="file" accept="image/*"  onchange="tempUpload(this); ">
+						</label>
+						<label class="temp-img" th:if="!${defImg}">
+							<input type="file" accept="image/*"  onchange="tempUpload(this); ">
+						</label>
+						<input type="hidden" class="tempKey" name="tempKey">
+						<input type="hidden" class="newName" name="newName">
+						<input type="hidden" class="def" name="def" value="true">
+					</div>
+				</div>
+				<div class="input-area add-img">
+					<label>상품이미지</label>
+					<div class="line-wrap">
+						<div class="img-wrap" th:if="${imgList}" th:each="img:${imgList}">
+							<label class="temp-img"	th:style="'background-image:url(//mycloud-shop-bucket.s3.ap-northeast-2.amazonaws.com/'+ ${img.bucketKey} + ');'">
+								<input class="hasImg" type="file" accept="image/*" onchange="tempUpload(this); ">
+							</label>
+							<input type="hidden" class="tempKey" name="tempKey">
+							<input type="hidden" class="newName" name="newName">
+							<input type="hidden" class="def" name="def" value="false">
+						</div>
+						<div class="img-wrap" th:if="!${imgList}">
+							<label class="temp-img">
+								<input type="file" accept="image/*" onchange="tempUpload(this);">
+							</label>
+							<input type="hidden" class="tempKey" name="tempKey">
+							<input type="hidden" class="newName" name="newName">
+							<input type="hidden" class="def" name="def" value="false">
+						</div>
+					</div>
+				</div>
+				<div class="input-area">
+					<label>상품설명</label>
+					<textarea name="pContent" th:field="${pd.pContent}" rows="5" cols="50"></textarea>
+				</div>
+				<div class="input-area">
+					<label>판매상태</label>
+					<span>판매가능</span>
+					<input type="radio" name="pStatus" th:checked="${pd.pStatus eq true}" value="true">
+					<span>판매중지</span>
+					<input type="radio" name="pStatus" th:checked="${pd.pStatus eq false}" value="false">
+				</div>
+				<div class="input-area">
+					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<input id="pNo" type="hidden" name="pNo" th:value="${pd.pNo}">
+					<button type="submit">수정</button>
+					
+					<button type="button" onclick = "location.href ='/admin/product/list'">취소</button>
+				</div>
+			</form>
+		</div>
+	</main>
+</html>

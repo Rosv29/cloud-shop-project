@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+
+
+main form>div{
+	margin: 0.5em 0;
+}
+
+.signin-area{
+	width: 450px;
+	margin: 0 auto;
+}
+
+.signin-area > form > div > input{
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	padding: 1em;
+	border-radius: 8px;
+}
+
+.btn-submit{
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	padding: 1em;
+	border-radius: 8px;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	margin-top: 1.5em;
+	cursor: pointer;
+}
+
+.mem-sup{
+	display: flex;
+	justify-content: flex-end;
+	font-size: 14px;
+}
+.bar-vert{
+	width: 1px;
+    height: 14px;
+    margin: 3px 6px 0;
+    background-color: #333;
+}

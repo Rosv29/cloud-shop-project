@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<script src="/js/admin/category/create.js"></script>
+		<link rel="stylesheet" href="/css/admin/category/create.css">
+	</head>
+	<main>
+		<div class="wrap">
+			<h1>카테고리 등록 페이지</h1>
+			<form action="/admin/category/create" method="post">
+				<label for="category1">1차카테고리</label>
+				<select id="category1" name="parentNo" onchange="categoryShow2(this)">
+					<option value="0" selected hidden="true">1차카테고리</option>
+				</select>
+				<label for="category2">2차카테고리</label>
+				<select id="category2">
+					<option>2차카테고리 목록</option>
+				</select>
+				<label for="input-name">카테고리 이름</label>
+				<div>
+					<input id="input-name" type="text" name="name" placeholder="카테고리명">
+				</div>
+				<div>
+					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>			
+					<button>등록</button>
+				</div>
+			</form>
+		</div>
+	</main>
+</html>

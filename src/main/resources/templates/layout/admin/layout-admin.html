@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:fragment="layout(head, main)">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/admin/admin.css">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<th:block th:replace="${head}" />
+	</head>
+	<body class="flex">
+		<th:block th:insert="~{layout/admin/header}" />
+		<th:block th:replace="${main}" />
+	</body>
+</html>

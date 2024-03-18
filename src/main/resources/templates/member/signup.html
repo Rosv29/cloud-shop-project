@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/member/signup.css">
+		<script src="/js/member/signup.js"></script>
+	</head>
+	<main>
+		<h1>회원가입페이지</h1>
+		<div class="signup-area">
+			<div>
+				<p class="title">회원가입</p>
+			</div>
+			<hr style="margin: 2em 0 0.5em 0">
+			<p class="announce"><span>*</span>표시는 필수입력요소입니다.</p>
+			<form action="/member/signup" method="post" onsubmit="return checkForm()">
+				<div>
+					<label for="id"><span>*</span>아이디</label>
+					<input type="text" id="id" name="id" placeholder="아이디" onfocusout="regexId()" maxlength="16">
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div>
+					<label for="password"><span>*</span>비밀번호</label>
+					<input type="password" id="password" name="password" placeholder="비밀번호"  onfocusout="regexPassword()" maxlength="20">
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div>
+					<label for="confirm-password">비밀번호확인</label>
+					<input type="password" id="confirm-password" placeholder="비밀번호확인" onfocusout="confirmPassword()" maxlength="20">
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div>
+					<label for="name"><span>*</span>이름</label>
+					<input type="text" id="name" name="name" placeholder="이름" onfocusout="regexName()">
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div class="email-wrap">
+					<label for="email"><span>*</span>이메일</label>
+					<input type="text" id="email" name="email" placeholder="이메일" onfocusout="regexEmail()">
+					<button class="btn-wrap" type="button" disabled="disabled" onclick="verifyEmail()">인증메일발송</button>
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div class="emailCheck-wrap">
+					<label for="emailCheck">이메일확인</label>
+					<input type="text" id="emailCheck" name="emailCheck" placeholder="인증번호입력">
+					<button class="btn-wrap" type="button" disabled="disabled" onclick="verifyCode()">확인</button>
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div>
+					<label for="phone"><span>*</span>휴대폰번호</label>
+					<input type="text" id="phone" name="phone" placeholder="전화번호" onfocusout="regexPhone()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+					<span class="msg"></span>
+					<input class="checkInput" type="checkbox" disabled="disabled">
+				</div>
+				<div>
+					<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<button class="btn-submit" type="submit">회원가입</button>
+				</div>
+			</form>
+		</div>
+	</main>
+</html>

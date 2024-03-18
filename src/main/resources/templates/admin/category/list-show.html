@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org">
+	<th:block th:each="allList:${list}">
+		<div class="flex" th:if="!${allList.parent}">
+			<p class="vno" th:text="${allList.name}"></p>
+			<input type="hidden" th:value="${allList.no}">
+			<input class="hideInput" type="text" th:value="${allList.name}">
+			<button type="button" onclick="changeBtn(this)">수정</button>
+			<button class="hideBtn" type="button" onclick="change(this)">완료</button>
+			<button type="button" onclick="deleteCate(this)">삭제</button>
+		</div>
+			<div class="sublist flex" th:each="sublist:${list}" th:if=${sublist.parent==allList}>
+				<p class="vno" th:text="${sublist.name}"></p>
+				<input type="hidden" th:value="${sublist.no}">
+				<input class="hideInput" type="text" th:value="${sublist.name}">
+				<button type="button" onclick="changeBtn(this)">수정</button>
+				<button class="hideBtn" type="button" onclick="change(this)">완료</button>
+				<button type="button" onclick="deleteCate(this)">삭제</button>
+			</div>
+	</th:block>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/common/product/detail.css">
+		<script src="/js/common/product/detail.js"></script>
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
+	</head>
+	<main>
+		<p class="title">제품 상세 페이지</p>
+		<div class="wrap">
+			<div class="flex">
+		 		<div class="img-area">
+			 		<ol class="flex">
+			 			<th:block th:each="img:${imgs}">
+			 			<li class="img" th:classappend="${img.def} ? 'def'"  
+			 				th:style="'background-image:url(//mycloud-shop-bucket.s3.ap-northeast-2.amazonaws.com/'+ ${img.bucketKey} + ');'"
+							onclick="changeDef(this)" ></li>
+			 			</th:block>
+			 		</ol>
+		 		</div>
+		 		<ul class="detail-info">
+		 			<li class="title2" th:text="${pd.pName}">타이틀</li>
+		 			<li class="flex between">
+		 				<span>판매가격</span>
+		 				<i>
+			 				<span th:text="${#numbers.formatInteger(pd.pPrice,3,'COMMA')}"></span>
+			 				<span>원</span>
+		 				</i>
+		 			</li>
+		 			<li class="flex between">
+		 				<span>구매수량</span>
+		 				<i>
+			 				<input type="number" min="1" value="1" onchange="money(this)">
+			 				<span>개</span>
+		 				</i>
+		 			</li>
+		 			<li class="flex between">
+		 				<span>배송비</span>
+		 				<i>
+						(5만원이상 무료배송)
+		 				<span th:text="${#numbers.formatInteger(3000,3,'COMMA')}"></span><span>원</span>
+		 				</i>
+		 			</li>
+		 			<li class="flex between">
+		 				<span>구매금액</span>
+		 				<i>
+		 				 <span id="purchase-amount" th:text="${#numbers.formatInteger(pd.pPrice,3,'COMMA')}"></span><span>원</span>
+		 				</i>
+		 			</li>
+		 			<li class="btn-wrap">
+		 				<input  class="name" type="hidden" th:value="${pd.pName}">
+		 				<input  class="price" type="hidden" th:value="${pd.pPrice}">
+		 				<input  class="amount" type="hidden" th:value="${pd.pPrice}">
+		 				<input  class="postM" type="hidden" value="3000">
+		 				<button type="button">장바구니</button>
+		 				<button type="button" onclick="pay(this)">구매하기</button>
+					</li>
+		 		</ul>
+	 		</div>
+		 	<div class="detail-content">
+			<span>상품정보</span>
+		 	 <textarea >[(${pd.pContent})]</textarea>
+		 	</div>
+		</div>
+	</main>
+</html>

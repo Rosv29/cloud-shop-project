@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+label{
+	display: block;
+	margin-bottom: 1em;
+}
+main form>div{
+	margin: 1.5em 0;
+}
+
+label > span, p> span{
+	color: red;
+}
+
+.announce{
+	font-size: 12px;
+	display: flex;
+	justify-content: end;
+}
+
+.signup-area{
+	width: 450px;
+	margin: 0 auto;
+}
+
+.signup-area > form > div > input{
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	padding: 1em;
+	border-radius: 8px;
+}
+
+.btn-submit{
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	padding: 1em;
+	border-radius: 8px;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	margin-top: 3em;
+}
+
+
+#email, #emailCheck{
+	width: 70%;
+	display: inline-block;
+}
+
+.btn-wrap{
+	width: 28%;
+	display: inline-block;
+	height: 50px;
+	padding: 1em;
+	border-radius: 8px;
+	justify-content:center;
+	align-items: center;
+}
+
+.emailCheck-wrap{
+	display: none;
+}
+
+.checkInput{
+	display: none;
+}
+
+.msg{
+	font-size: 12px;
+}
+

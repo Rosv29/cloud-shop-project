@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" xmlns:sec="//www.thymeleaf.org/extras/spring-security">
+<header>
+	<h1>상단영역</h1>
+	<div class="flex memberBar" sec:authorize="isAnonymous()">
+		<a href="/member/signin">로그인</a>
+		<a href="/member/signup">회원가입</a>
+	</div>
+	<div class="flex memberBar" sec:authorize="isAuthenticated()">
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<a href="/admin">관리자페이지</a>
+		</div>
+		<div>
+			<span sec:authentication="principal.name"></span>
+			(<span sec:authentication="principal.korName"></span>)
+		</div>
+		<div>
+			<a href="#">회원정보</a>
+		</div>
+		<form action="logout" method="post">
+			<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<label>로그아웃<button id="logout"></button></label>
+		</form>
+	</div>
+	<div id="header-wrap" class="wrap flex">
+		<div class="logo-wrap flex">
+			<a href="/" class="logo">CLOUD SHOP</a>
+		</div>
+		<div class="searchBar flex">
+			<form action="/common/search" method="post">
+			<div class="flex">
+				<input type="text" name="searchName" placeholder="검색어를 입력해주세요">
+				<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<button class="search-btn"></button>
+			</div>
+		</form>
+		</div>
+		<div class="iconBar">
+			<div>
+				<img src="/images/common/board.png">
+				<img src="/images/common/heart.png">
+				<img src="/images/common/cart.png">
+			</div>
+		</div>
+	</div>
+	<div id="cate-wrap">
+		
+	</div>
+</header>
+
+</html>

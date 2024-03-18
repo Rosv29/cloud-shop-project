@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/admin/layout-admin :: layout(~{::head},~{::main})}">
+	<head>
+		<link rel="stylesheet" href="/css/admin/product/list.css">
+		<script src="/js/admin/product/list.js"></script>
+	</head>
+	<main>
+		<div class="wrap">
+			<table class="list-table" border="1">
+				<tr>
+					<th>카테고리</th>
+					<th>상품번호</th>
+					<th>상품명</th>
+					<th>대표이미지</th>
+					<th>가격</th>
+					<th>재고</th>
+					<th>판매상태</th>
+					<th>등록날짜</th>
+					<th>상품수정/삭제</th>
+				</tr>
+				<th:block th:if="${list}">
+					<tr th:each="dto:${list}">
+						<td>
+							<span th:text="${dto.category} !=null ?${dto.category.name}:없음"></span>
+							(<span th:text="${dto.category.no}"></span>)
+						</td>
+						<td th:text="${dto.no}"></td>
+						<td th:text="${dto.name}"></td>
+						<td>
+							<img th:src="${dto.bucketKey}" width="150px" height="100px">
+						</td>
+						<td th:text="${#numbers.formatInteger(dto.price,0,'COMMA')}+원"></td>
+						<td th:text="${dto.stock}+개"></td>
+						<td th:text="${dto.status}?판매가능:판매중지"></td>
+						<td th:text="${#temporals.format(dto.createdDate, 'yyyy년 MM월 dd일 HH:mm:ss')}"></td>
+						<td>
+							<a th:href="|/admin/product/update/${dto.no}|">수정</a>
+							<span>/</span>
+							<a th:href="|/admin/product/delete/${dto.no}|">삭제</a>
+						</td>					
+					</tr>
+				</th:block>
+			</table>
+		</div>
+	</main>
+</html>
