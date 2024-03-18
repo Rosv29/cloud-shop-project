@@ -23,4 +23,4 @@
 # 팀프로젝트 설명
 ## http://github.com/balancekim/green-six
 
-## https://github.com/Rosv29/greenSix 소스코드수정링크
+## 소스코드수정링크 https://github.com/Rosv29/greenSix
