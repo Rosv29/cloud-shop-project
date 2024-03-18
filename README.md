@@ -7,6 +7,9 @@
 ### ADMIN ID : ADMIN
 ### PASSWORD : 1234
 
+### USER ID : test01
+### PASSWORD : asd123
+
 # Java, Spring Boot, MariaDB, Spring Data JPA, AJAX, Jquery, ThymeLeaf ,AWS S3
 
 ## 회원가입 시 정규식 테스트 -> AJAX를 통해 비동기로 처리(아이디 중복, 비밀번호 확인),  이메일 인증 기능 (REDIS 사용) , 스프링 시큐리티를 통해 권한 설정(Enum 형식으로 Role 적용) ,CSRF 토큰 적용
