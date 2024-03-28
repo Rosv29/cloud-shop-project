@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="//www.thymeleaf.org" th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
+<html xmlns:th="//www.thymeleaf.org" xmlns:sec="//www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/common/layout-common :: layout(~{::head},~{::main})}">
 	<head>
 		<link rel="stylesheet" href="/css/common/product/detail.css">
 		<script src="/js/common/product/detail.js"></script>
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
+	<script type="text/javascript">
+	function redirectToLogin() {
+		window.location.href = /*[[@{/member/signin}]]*/ '/member/signin'; // 로그인 페이지 경로로 변경
+	}
+	</script>
 	</head>
+	
 	<main>
 		<p class="title">제품 상세 페이지</p>
 		<div class="wrap">
@@ -53,8 +60,10 @@
 		 				<input  class="price" type="hidden" th:value="${pd.pPrice}">
 		 				<input  class="amount" type="hidden" th:value="${pd.pPrice}">
 		 				<input  class="postM" type="hidden" value="3000">
-		 				<button type="button">장바구니</button>
-		 				<button type="button" onclick="pay(this)">구매하기</button>
+		 				<button type="button" sec:authorize="isAnonymous()" onclick="redirectToLogin()">장바구니</button>
+		 				<button type="button" sec:authorize="isAnonymous()" onclick="redirectToLogin()">구매하기</button>
+		 				<button type="button" sec:authorize="isAuthenticated()" onclick="location.href='#'" >장바구니</button>
+		 				<button type="button" sec:authorize="isAuthenticated()" onclick="pay(this)" >구매하기</button>
 					</li>
 		 		</ul>
 	 		</div>
